@@ -8,8 +8,6 @@ if (isset($_GET['msg']) && $_GET['msg'] == 'order_success') {
 
 $stmt = $pdo->query("SELECT * FROM products ORDER BY id DESC");
 $products = $stmt->fetchAll();
-
-// Đếm số sản phẩm
 $totalProducts = count($products);
 ?>
 <!DOCTYPE html>
@@ -44,7 +42,6 @@ $totalProducts = count($products);
 </header>
 
 <main>
-  <!-- HERO -->
   <div class="container hero">
     <div class="hero-content">
       <div class="badge"><i class="fas fa-rocket"></i> Bản quyền 2026</div>
@@ -75,7 +72,6 @@ $totalProducts = count($products);
     </div>
   </div>
 
-  <!-- FEATURES -->
   <div class="container feature-row">
     <div class="feature-item">
       <i class="fas fa-shield-alt"></i>
@@ -99,7 +95,6 @@ $totalProducts = count($products);
     </div>
   </div>
 
-  <!-- PRODUCTS -->
   <div class="container" id="products">
     <div class="section-header">
       <h2>Key hack <span>nổi bật</span></h2>
