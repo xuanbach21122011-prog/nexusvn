@@ -1,61 +1,63 @@
 <?php
 include 'config.php';
 
-// Xử lý thông báo thanh toán thành công
 if (isset($_GET['msg']) && $_GET['msg'] == 'order_success') {
     echo "<script>alert('✅ Thanh toán thành công! Cảm ơn bạn đã mua hàng.'); window.location.href='order_success.php';</script>";
     exit;
 }
 
-// Lấy danh sách sản phẩm
 $stmt = $pdo->query("SELECT * FROM products ORDER BY id DESC");
 $products = $stmt->fetchAll();
+
+// Đếm số sản phẩm
+$totalProducts = count($products);
 ?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NEXUS VN · Công cụ kỹ thuật số</title>
+  <title>NEXUS VN – Key Hack, Phần mềm chất lượng</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 <header>
-  <div class="container header-inner">
+  <div class="container">
     <div class="logo"><i class="fas fa-bolt"></i> NEXUS VN</div>
-    <nav class="nav-links">
-      <a href="/">Trang chủ</a>
-      <a href="/cart.php">🛒 Giỏ hàng</a>
-      <a href="/leaderboard.php">🏆 Bảng xếp hạng</a>
+    <nav>
+      <a href="index.php">Trang chủ</a>
+      <a href="cart.php"><i class="fas fa-shopping-cart"></i> Giỏ hàng</a>
+      <a href="leaderboard.php"><i class="fas fa-trophy"></i> Bảng xếp hạng</a>
       <?php if (isset($_SESSION['user_id'])): ?>
-        <a href="/payment.php">💳 Nạp tiền</a>
         <span class="user-info">👤 <?= htmlspecialchars($_SESSION['username']) ?> (<?= number_format($_SESSION['balance'] ?? 0, 0) ?>đ)</span>
-        <a href="/logout.php" class="btn-logout">Đăng xuất</a>
+        <a href="logout.php" class="btn-logout">Đăng xuất</a>
       <?php else: ?>
-        <a href="/login.php">Đăng nhập</a>
+        <a href="login.php" class="btn-ghost"><i class="fas fa-user"></i> Đăng nhập</a>
+        <a href="register.php" class="btn-glow"><i class="fas fa-user-plus"></i> Đăng ký</a>
       <?php endif; ?>
     </nav>
   </div>
 </header>
 
 <main>
+  <!-- HERO -->
   <div class="container hero">
     <div class="hero-content">
-      <div class="badge"><i class="fas fa-rocket"></i> Early Access 2026</div>
+      <div class="badge"><i class="fas fa-rocket"></i> Bản quyền 2026</div>
       <h1>Nâng cấp trải nghiệm <br>với <span>công cụ số</span> chất lượng</h1>
       <p>NEXUS VN – nơi cung cấp key hack, phần mềm, tiện ích chuyên sâu dành cho game thủ và người dùng hiện đại.</p>
       <div class="hero-buttons">
         <a href="#products" class="btn-glow"><i class="fas fa-eye"></i> Xem sản phẩm</a>
-        <a href="/login.php" class="btn-ghost" style="padding:14px 28px;"><i class="fas fa-user"></i> Đăng nhập</a>
+        <a href="register.php" class="btn-ghost" style="padding:14px 28px;"><i class="fas fa-play"></i> Bắt đầu ngay</a>
       </div>
       <div class="hero-stats">
-        <div class="stat"><span class="num"><?= count($products) ?>+</span><span class="label">Sản phẩm</span></div>
-        <div class="stat"><span class="num">4.9⭐</span><span class="label">Đánh giá</span></div>
-        <div class="stat"><span class="num">3.2k</span><span class="label">Người dùng</span></div>
+        <div class="stat"><span class="num"><?= $totalProducts ?>+</span><span class="label">Sản phẩm</span></div>
+        <div class="stat"><span class="num">4.9 ★</span><span class="label">Đánh giá</span></div>
+        <div class="stat"><span class="num">3.2K</span><span class="label">Người dùng</span></div>
       </div>
     </div>
     <div class="hero-visual">
@@ -73,6 +75,7 @@ $products = $stmt->fetchAll();
     </div>
   </div>
 
+  <!-- FEATURES -->
   <div class="container feature-row">
     <div class="feature-item">
       <i class="fas fa-shield-alt"></i>
@@ -96,40 +99,28 @@ $products = $stmt->fetchAll();
     </div>
   </div>
 
+  <!-- PRODUCTS -->
   <div class="container" id="products">
     <div class="section-header">
-      <h2>🔥 <span>Key hack</span> nổi bật</h2>
+      <h2>Key hack <span>nổi bật</span></h2>
       <p>Chọn sản phẩm phù hợp với nhu cầu của bạn – mỗi key đều được kiểm tra kỹ lưỡng</p>
     </div>
-
     <div class="grid-products">
-      <?php if (count($products) > 0): ?>
+      <?php if ($totalProducts > 0): ?>
         <?php foreach ($products as $product): ?>
           <div class="product-card">
-            <?php if ($product['price'] > 200000): ?>
-              <span class="hot-badge">🔥 Hot</span>
-            <?php elseif ($product['price'] > 100000): ?>
-              <span class="popular-badge">⭐ Phổ biến</span>
-            <?php endif; ?>
-            <div class="icon"><i class="fas fa-key"></i></div>
+            <img src="<?= $product['image'] ? '/assets/uploads/' . $product['image'] : '/assets/uploads/default.jpg' ?>" alt="<?= htmlspecialchars($product['name']) ?>">
             <h3><?= htmlspecialchars($product['name']) ?></h3>
-            <div class="price"><?= number_format($product['price'], 0) ?>đ <small>/ key</small></div>
+            <p class="price"><?= number_format($product['price'], 0) ?>đ</p>
             <p class="desc"><?= htmlspecialchars($product['description']) ?></p>
-            <ul class="features">
-              <li><i class="fas fa-check"></i> Bảo hành 24h</li>
-              <li><i class="fas fa-check"></i> Giao ngay sau thanh toán</li>
-              <li><i class="fas fa-check"></i> Hỗ trợ đổi key</li>
-            </ul>
-            <form action="/cart.php" method="POST">
+            <form action="cart.php" method="POST">
               <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
-              <button type="submit" name="add_to_cart" class="btn-buy"><i class="fas fa-shopping-bag"></i> Thêm vào giỏ</button>
+              <button type="submit" name="add_to_cart" class="btn-add"><i class="fas fa-shopping-bag"></i> Thêm vào giỏ</button>
             </form>
           </div>
         <?php endforeach; ?>
       <?php else: ?>
-        <div class="empty-msg" style="grid-column: 1 / -1; text-align:center; padding:60px 0; color:#94a3b8; font-size:1.1rem;">
-          Chưa có sản phẩm nào. <a href="/admin.php" style="color:#2563eb; font-weight:600;">Thêm sản phẩm</a>
-        </div>
+        <p class="empty-msg">Chưa có sản phẩm nào. <a href="admin.php">Thêm sản phẩm</a></p>
       <?php endif; ?>
     </div>
   </div>
@@ -172,7 +163,7 @@ $products = $stmt->fetchAll();
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; 2026 NEXUS VN – Công cụ số chất lượng cao.</span>
+      <span>&copy; 2026 NEXUS VN. All rights reserved.</span>
       <div class="footer-social">
         <a href="#"><i class="fab fa-facebook"></i></a>
         <a href="#"><i class="fab fa-telegram"></i></a>
