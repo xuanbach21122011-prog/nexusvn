@@ -27,12 +27,12 @@ $totalProducts = count($products);
   <div class="container">
     <div class="logo"><i class="fas fa-bolt"></i> NEXUS VN</div>
     <nav>
-      <a href="index.php">Trang chủ</a>
+      <a href="index.php"><i class="fas fa-home"></i> Trang chủ</a>
       <a href="cart.php"><i class="fas fa-shopping-cart"></i> Giỏ hàng</a>
       <a href="leaderboard.php"><i class="fas fa-trophy"></i> Bảng xếp hạng</a>
       <?php if (isset($_SESSION['user_id'])): ?>
         <span class="user-info">👤 <?= htmlspecialchars($_SESSION['username']) ?> (<?= number_format($_SESSION['balance'] ?? 0, 0) ?>đ)</span>
-        <a href="logout.php" class="btn-logout">Đăng xuất</a>
+        <a href="logout.php" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
       <?php else: ?>
         <a href="login.php" class="btn-ghost"><i class="fas fa-user"></i> Đăng nhập</a>
         <a href="register.php" class="btn-glow"><i class="fas fa-user-plus"></i> Đăng ký</a>
@@ -42,6 +42,7 @@ $totalProducts = count($products);
 </header>
 
 <main>
+  <!-- HERO -->
   <div class="container hero">
     <div class="hero-content">
       <div class="badge"><i class="fas fa-rocket"></i> Bản quyền 2026</div>
@@ -72,6 +73,7 @@ $totalProducts = count($products);
     </div>
   </div>
 
+  <!-- FEATURES -->
   <div class="container feature-row">
     <div class="feature-item">
       <i class="fas fa-shield-alt"></i>
@@ -95,6 +97,7 @@ $totalProducts = count($products);
     </div>
   </div>
 
+  <!-- PRODUCTS -->
   <div class="container" id="products">
     <div class="section-header">
       <h2>Key hack <span>nổi bật</span></h2>
