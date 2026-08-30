@@ -22,16 +22,17 @@ a {
     width: 100%;
 }
 
-/* ===== HEADER ===== */
+/* ===== HEADER (Glassmorphism + Glow) ===== */
 header {
-    background: rgba(11, 11, 16, 0.7);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: rgba(11, 11, 16, 0.6);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     position: sticky;
     top: 0;
     z-index: 100;
     padding: 16px 0;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
 }
 header .container {
     display: flex;
@@ -43,10 +44,11 @@ header .container {
 .logo {
     font-size: 1.8rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #c084fc, #f472b6);
+    background: linear-gradient(135deg, #c084fc, #f472b6, #fbbf24);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    text-shadow: 0 0 40px rgba(192, 132, 252, 0.15);
 }
 .logo i {
     -webkit-text-fill-color: initial;
@@ -62,15 +64,33 @@ nav {
 nav a {
     font-weight: 500;
     color: #b0aac0;
-    transition: 0.2s;
+    transition: 0.3s;
     font-size: 0.95rem;
+    position: relative;
+}
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #c084fc, #f472b6);
+    transition: width 0.3s;
 }
 nav a:hover {
-    color: #c084fc;
+    color: #fff;
+}
+nav a:hover::after {
+    width: 100%;
 }
 nav .user-info {
     color: #c084fc;
     font-weight: 600;
+    background: rgba(192, 132, 252, 0.1);
+    padding: 4px 14px;
+    border-radius: 40px;
+    border: 1px solid rgba(192, 132, 252, 0.15);
 }
 .btn-logout {
     background: #ef4444;
@@ -79,28 +99,30 @@ nav .user-info {
     border-radius: 40px;
     font-weight: 600;
     font-size: 0.85rem;
-    transition: 0.2s;
+    transition: 0.3s;
 }
 .btn-logout:hover {
     background: #dc2626;
+    transform: scale(1.05);
 }
 .btn-ghost {
-    border: 1px solid #2a2535;
+    border: 1px solid rgba(192, 132, 252, 0.3);
     padding: 8px 20px;
     border-radius: 40px;
     font-weight: 600;
     font-size: 0.85rem;
     background: transparent;
     color: #ccc6d9;
-    transition: 0.25s;
+    transition: 0.3s;
     cursor: pointer;
 }
 .btn-ghost:hover {
     border-color: #c084fc;
     color: #fff;
+    box-shadow: 0 0 20px rgba(192, 132, 252, 0.1);
 }
 .btn-glow {
-    background: linear-gradient(135deg, #a855f7, #ec4899);
+    background: linear-gradient(135deg, #a855f7, #ec4899, #fbbf24);
     color: #fff;
     padding: 8px 24px;
     border-radius: 40px;
@@ -110,13 +132,15 @@ nav .user-info {
     cursor: pointer;
     box-shadow: 0 4px 20px rgba(168, 85, 247, 0.3);
     transition: 0.3s;
+    background-size: 200% auto;
 }
 .btn-glow:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 30px rgba(168, 85, 247, 0.5);
+    transform: scale(1.05);
+    box-shadow: 0 8px 40px rgba(168, 85, 247, 0.5);
+    background-position: right center;
 }
 
-/* ===== HERO ===== */
+/* ===== HERO (Neon Glow) ===== */
 .hero {
     padding: 60px 0 40px;
     display: flex;
@@ -129,15 +153,16 @@ nav .user-info {
 }
 .hero-content .badge {
     display: inline-block;
-    background: rgba(168, 85, 247, 0.15);
+    background: rgba(168, 85, 247, 0.12);
     color: #c084fc;
     font-size: 0.75rem;
     font-weight: 700;
     padding: 4px 18px;
     border-radius: 40px;
     letter-spacing: 0.5px;
-    border: 1px solid rgba(168, 85, 247, 0.2);
+    border: 1px solid rgba(168, 85, 247, 0.15);
     margin-bottom: 16px;
+    backdrop-filter: blur(4px);
 }
 .hero-content h1 {
     font-size: 3.4rem;
@@ -146,10 +171,11 @@ nav .user-info {
     margin-bottom: 16px;
 }
 .hero-content h1 span {
-    background: linear-gradient(135deg, #c084fc, #f472b6);
+    background: linear-gradient(135deg, #c084fc, #f472b6, #fbbf24);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    text-shadow: 0 0 60px rgba(192, 132, 252, 0.1);
 }
 .hero-content p {
     color: #9a93ab;
@@ -167,7 +193,7 @@ nav .user-info {
     gap: 32px;
     margin-top: 32px;
     padding-top: 24px;
-    border-top: 1px solid #1f1b2b;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
 }
 .hero-stats .stat {
     display: flex;
@@ -177,6 +203,7 @@ nav .user-info {
     font-size: 1.8rem;
     font-weight: 800;
     color: #fff;
+    text-shadow: 0 0 30px rgba(192, 132, 252, 0.1);
 }
 .hero-stats .stat .label {
     font-size: 0.8rem;
@@ -194,6 +221,7 @@ nav .user-info {
     gap: 18px;
     min-height: 280px;
     justify-content: center;
+    box-shadow: 0 0 60px rgba(192, 132, 252, 0.02);
 }
 .hero-visual .code-block {
     background: #12101a;
@@ -209,7 +237,7 @@ nav .user-info {
 .code-block .keyword { color: #c084fc; }
 .code-block .comment { color: #4a435a; }
 
-/* ===== SẢN PHẨM ===== */
+/* ===== SẢN PHẨM (Glow Card) ===== */
 .section-header {
     text-align: center;
     margin: 60px 0 30px;
@@ -219,7 +247,7 @@ nav .user-info {
     font-weight: 700;
 }
 .section-header h2 span {
-    background: linear-gradient(135deg, #c084fc, #f472b6);
+    background: linear-gradient(135deg, #c084fc, #f472b6, #fbbf24);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -243,9 +271,9 @@ nav .user-info {
     transition: all 0.3s ease;
 }
 .product-card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-8px);
     border-color: #c084fc;
-    box-shadow: 0 20px 50px rgba(168, 85, 247, 0.06);
+    box-shadow: 0 20px 60px rgba(168, 85, 247, 0.06), 0 0 40px rgba(168, 85, 247, 0.02);
 }
 .product-card img {
     width: 100%;
@@ -264,6 +292,7 @@ nav .user-info {
     font-size: 1.4rem;
     font-weight: 800;
     color: #c084fc;
+    text-shadow: 0 0 20px rgba(192, 132, 252, 0.1);
 }
 .product-card .desc {
     color: #9a93ab;
@@ -281,12 +310,13 @@ nav .user-info {
     font-weight: 700;
     font-size: 0.9rem;
     cursor: pointer;
-    transition: 0.25s;
+    transition: 0.3s;
 }
 .btn-add:hover {
     background: linear-gradient(135deg, #a855f7, #ec4899);
     border-color: transparent;
     color: #fff;
+    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.25);
 }
 .empty-msg {
     text-align: center;
@@ -306,17 +336,22 @@ nav .user-info {
     gap: 24px;
     margin: 60px 0 30px;
     padding: 40px 0;
-    border-top: 1px solid #1f1b2b;
-    border-bottom: 1px solid #1f1b2b;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 .feature-item {
     text-align: center;
     padding: 16px;
+    transition: 0.3s;
+}
+.feature-item:hover {
+    transform: translateY(-4px);
 }
 .feature-item i {
     font-size: 2.2rem;
     color: #c084fc;
     margin-bottom: 10px;
+    text-shadow: 0 0 30px rgba(192, 132, 252, 0.15);
 }
 .feature-item h4 {
     font-weight: 700;
@@ -332,7 +367,7 @@ nav .user-info {
 /* ===== FOOTER ===== */
 footer {
     background: #0b0b10;
-    border-top: 1px solid #1f1b2b;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
     padding: 40px 0 24px;
     margin-top: 60px;
 }
@@ -359,10 +394,13 @@ footer .container {
     margin-bottom: 8px;
     font-size: 0.9rem;
     color: #9a93ab;
-    transition: 0.2s;
+    transition: 0.3s;
     cursor: default;
 }
-.footer-col ul li:hover { color: #c084fc; }
+.footer-col ul li:hover {
+    color: #c084fc;
+    transform: translateX(4px);
+}
 .footer-bottom {
     display: flex;
     justify-content: space-between;
@@ -370,17 +408,20 @@ footer .container {
     flex-wrap: wrap;
     gap: 16px;
     padding-top: 20px;
-    border-top: 1px solid #1f1b2b;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
     font-size: 0.85rem;
     color: #7d728f;
 }
 .footer-social a {
     margin-left: 16px;
     color: #9a93ab;
-    transition: 0.2s;
+    transition: 0.3s;
     font-size: 1.2rem;
 }
-.footer-social a:hover { color: #c084fc; }
+.footer-social a:hover {
+    color: #c084fc;
+    transform: translateY(-2px);
+}
 
 /* ===== AUTH BOX (Đăng nhập/Đăng ký) ===== */
 .auth-box {
@@ -390,7 +431,7 @@ footer .container {
     padding: 40px;
     border-radius: 28px;
     border: 1px solid #211c2e;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), 0 0 60px rgba(168, 85, 247, 0.01);
 }
 .auth-box h2 {
     text-align: center;
@@ -410,12 +451,12 @@ footer .container {
     background: #1e1730;
     color: #f0edf5;
     font-size: 1rem;
-    transition: border 0.3s;
+    transition: border 0.3s, box-shadow 0.3s;
 }
 .auth-box input:focus {
     outline: none;
     border-color: #c084fc;
-    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.15);
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.12), 0 0 30px rgba(168, 85, 247, 0.02);
 }
 .auth-box input::placeholder {
     color: #7d728f;
@@ -431,28 +472,32 @@ footer .container {
     font-size: 1.1rem;
     cursor: pointer;
     margin-top: 12px;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: 0.3s;
     box-shadow: 0 4px 20px rgba(168, 85, 247, 0.25);
+    background-size: 200% auto;
 }
 .auth-box button:hover {
     transform: scale(1.02);
-    box-shadow: 0 8px 30px rgba(168, 85, 247, 0.4);
+    box-shadow: 0 8px 40px rgba(168, 85, 247, 0.4);
+    background-position: right center;
 }
 .auth-box .error {
     color: #ef4444;
-    background: #1a0b0b;
+    background: rgba(239, 68, 68, 0.1);
     padding: 12px;
     border-radius: 12px;
     margin-bottom: 16px;
     text-align: center;
+    border: 1px solid rgba(239, 68, 68, 0.15);
 }
 .auth-box .success {
     color: #34d399;
-    background: #0b1f1a;
+    background: rgba(52, 211, 153, 0.1);
     padding: 12px;
     border-radius: 12px;
     margin-bottom: 16px;
     text-align: center;
+    border: 1px solid rgba(52, 211, 153, 0.15);
 }
 .auth-box .links {
     display: flex;
@@ -463,10 +508,11 @@ footer .container {
     color: #c084fc;
     text-decoration: none;
     font-weight: 500;
-    transition: 0.2s;
+    transition: 0.3s;
 }
 .auth-box .links a:hover {
     color: #f472b6;
+    text-shadow: 0 0 20px rgba(192, 132, 252, 0.1);
 }
 
 /* ===== CART / CHECKOUT / PAYMENT ===== */
@@ -482,6 +528,7 @@ footer .container {
     border: 1px solid #211c2e;
     max-width: 800px;
     margin: 40px auto;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
 }
 .cart-container h2,
 .checkout-container h2,
@@ -496,7 +543,7 @@ footer .container {
 .checkout-item,
 .rank-item,
 .order-item {
-    border-bottom: 1px solid #1f1b2b;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     padding: 12px 0;
     display: flex;
     justify-content: space-between;
@@ -521,12 +568,14 @@ footer .container {
     border-radius: 40px;
     font-weight: 600;
     cursor: pointer;
-    transition: 0.2s;
+    transition: 0.3s;
+    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.2);
 }
 .btn-checkout:hover,
 .btn-pay:hover,
 .btn-recharge:hover {
     transform: scale(1.02);
+    box-shadow: 0 8px 40px rgba(168, 85, 247, 0.3);
 }
 .btn-remove {
     background: #ef4444;
@@ -535,16 +584,23 @@ footer .container {
     padding: 6px 16px;
     border-radius: 40px;
     cursor: pointer;
+    transition: 0.3s;
+}
+.btn-remove:hover {
+    background: #dc2626;
+    transform: scale(1.05);
 }
 .success-icon {
     font-size: 4rem;
-    color: #22c55e;
+    color: #34d399;
+    text-shadow: 0 0 40px rgba(52, 211, 153, 0.1);
 }
 .order-info {
     background: #1e1730;
     padding: 16px;
     border-radius: 12px;
     margin: 16px 0;
+    border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 /* ===== RESPONSIVE ===== */
